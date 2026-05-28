@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Antivirus Center.</title>
+  </head>
+  <body>
+    <div id="files">
+      <div id="f1" msg="fr">malware.exe.txt</div>
+      <div id="f2" msg="fr">trojan.trj.docx</div>
+      <div id="f3" msg="mw">dGhpcyBpcyBhIG1hbHdhcmU=.exe</div>
+      <div id="f4" msg="fr">18 8 11 11 24 5 20 13 13 24 0 15 15.exe</div>
+      <div id="f5" msg="mw">w1nd0w5 3xpl0d3r.FUN</div>
+    </div>
+
+    <div id="results">
+      <p id="selectedF">Selected file will be here</p>
+      <p id="answer">Answer will be here</p>
+    </div>
+
+    <div id="tools">
+      <button type="button" onclick="inspect()">Inspect the selected file (view it's content)</button>
+      <button type="button" onclick="del()">Delete the selected file</button>
+    </div>
+
+    <style>
+      #files {
+        display: flex;
+        justify-content: left;
+        flex-direction: column;
+        border: 2px solid red;
+      }
+
+      #tools {
+        display: flex;
+        justify-content: right;
+        flex-direction: column;
+        border: 2px solid lime;
+      }
+
+      #results {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        border: 2px solid black;
+      }
+
+      #f1, #f2, #f3, #f4, #f5 {
+        background: blue;
+        margin: 10px;
+        font-family: 'Courier New', Courier, monospace;
+      }
+    </style>
+
+    <script>
+      let file1 = document.getElementById("f1");
+      let file2 = document.getElementById("f2");
+      let file3 = document.getElementById("f3");
+      let file4 = document.getElementById("f4");
+      let file5 = document.getElementById("f5");
+
+      let prFile = document.getElementById("selectedF");
+      let prStatus = document.getElementById("status");
+      let prAns = document.getElementById("answer");
+
+      let selecting = "none";
+      let corr = 0;
+      let wrng = 0;
+
+      file1.onclick = () => {
+        selecting = "file1";
+        prFile.textContent = `Selecting: ${selecting}`
+      }
+      file2.onclick = () => {
+        selecting = "file2";
+        prFile.textContent = `Selecting: ${selecting}`
+      }
+      file3.onclick = () => {
+        selecting = "file3";
+        prFile.textContent = `Selecting: ${selecting}`
+      }
+      file4.onclick = () => {
+        selecting = "file4";
+        prFile.textContent = `Selecting: ${selecting}`
+      }
+      file5.onclick = () => {
+        selecting = "file5";
+        prFile.textContent = `Selecting: ${selecting}`
+      }
+
+      function inspect() {
+        if (selecting === "file1") {
+            prAns.textContent = "Content: 'this is not a malware lol'; File type: .txt (Notepad, text)";
+
+        } else if (selecting === "file2") {
+            prAns.textContent = "Content: 'totally real trojan hehehe'; File type: .docx (Microsoft Words)";
+
+        } else if (selecting === "file3") {
+            prAns.textContent = "Content: 'onload: delete C:/Windows/System32 -alldirectories'; File type: .exe (Executable)";
+
+        } else if (selecting === "file4") {
+            prAns.textContent = "Content: 'onload: startGame()'; File type: .exe (Executable); Proven safe by: Watermelon";
+
+        } else if (selecting === "file5") {
+            prAns.textContent = "Content: 'onload: run[Ransomware.exe]'; File type: .exe (Executable) _ hidden";
+
+        } else {
+            prAns.textContent = "No files found.";
+        }
+      }
+
+      function del() {
+        if (selecting === "file1") {
+            prAns.textContent = "You deleted a normal file :(";
+            file1.remove();
+            wrng += 25;
+
+        } else if (selecting === "file2") {
+            prAns.textContent = "You deleted a normal file :(";
+            file2.remove();
+            wrng += 25;
+
+        } else if (selecting === "file3") {
+            prAns.textContent = "You deleted a malware! :)";
+            file3.remove();
+            corr += 50;
+
+        } else if (selecting === "file4") {
+            prAns.textContent = "You deleted a normal file :(";
+            file4.remove();
+            wrng += 25;
+
+        } else if (selecting === "file5") {
+            prAns.textContent = "You deleted a malware! :)";
+            file5.remove();
+            corr += 50;
+
+        } else {
+            prAns.textContent = "No files found.";
+        }
+
+        if (corr === 100) {
+            alert("You deleted every malware on the browser!");
+            alert("You've completed Part 1 _ Center!")
+        } else if (wrng === 75) {
+            alert("You deleted everything :(")
+            alert("Let's retry!")
+            location.reload();
+        }
+      }
+    </script>
+
+  </body>
+</html>
